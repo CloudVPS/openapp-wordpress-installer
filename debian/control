@@ -1,0 +1,27 @@
+Source: openapp-wordpress-installer
+Section: web
+Priority: extra
+Maintainer: Mark Schouten <mark@tuxis.nl>
+Build-Depends: debhelper
+Standards-Version: 3.9.1
+Homepage: http://www.openpanel.com/openapp/
+
+Package: openapp-wordpress-installer
+Architecture: any
+Pre-Depends: wget | curl, pwgen, mysql-client, mysql-server, apache2-mpm-prefork
+Depends: ${shlibs:Depends}, ${misc:Depends}, php5-cli, libapache2-mod-php5, php5-mysql
+Description: Wordpress CMS
+ A Openpanel OpenApp meta-package for Wordpress. This does not carry the actual Wordpress source,
+ but just makes sure that it is installed and upgraded if necessary. It detects the current
+ version of Wordpress and thus can see if you upgraded via the webinterface.
+ .
+ This package is built for openapp, but can be used without openapp. Do note though, that upon
+ install, /var/www will be emptied after a backup has been made into /var/backups/.
+ .
+ Please see http://www.openpanel.com/openapp/ for more info.
+
+Package: openapp-wordpress
+Architecture: any
+Pre-Depends: openapp-backup
+Depends: ${shlibs:Depends}, ${misc:Depends}, openpanel-openapp-mod-wordpress, openapp-wordpress-installer, rsync
+Description: This will install your wordpress OpenApp Appliance!
