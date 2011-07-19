@@ -1,0 +1,28 @@
+#!/bin/bash
+
+
+fatal() {
+    echo "ERROR: $1"
+    exit 1
+}
+
+[ -z $1 ] && PASSWORD=`pwgen -s 10`
+[ "$1" = "stdin" ] && read -p "Please enter your password: " PASSWORD
+
+MYSQL=/usr/bin/mysql
+OPTS="--defaults-file=/etc/mysql/debian.cnf wordpress -B -N -e"
+
+QUERY="${MYSQL} ${OPTS}"
+[ $UID -eq 0 ] || fatal "You need to be root to run this"
+[ -z "$PASSWORD" ] && fatal "We don't have a password. Is pwgen installed?"
+
+MD5_PWD=$(echo -n ${PASSWORD} | md5sum | cut -f 1 -d ' ')
+
+
+if [ -z `${QUERY} "SELECT user_login FROM wp_users WHERE user_login = 'admin'";` ]; then
+    ${QUERY} "INSERT INTO wp_users (user_login, user_pass, user_nicename, user_status, display_name) VALUES ('admin', '${MD5_PWD}', 'admin', 0, 'admin')" || fatal "Could not add user in wp_users"
+else 
+    ${QUERY} "UPDATE wp_users SET user_pass = '${MD5_PWD}' WHERE user_login = 'admin'" || fatal "Could not change password for admin"
+fi
+
+echo "${PASSWORD} is your new password"

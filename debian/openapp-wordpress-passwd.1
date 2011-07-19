@@ -1,0 +1,44 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH OPENAPP-wordpress-PASSWD 1 "June 22, 2011"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+openapp-wordpress-passwd \- (re)set the Wordpress admin password
+.SH SYNOPSIS
+.B openapp-wordpress-passwd [stdin]
+.SH DESCRIPTION
+This manual page documents briefly the
+.B openapp-wordpress-passwd
+command.
+.PP
+.\" TeX users may be more comfortable with the \fB<whatever>\fP and
+.\" \fI<whatever>\fP escape sequences to invode bold face and italics,
+.\" respectively.
+\fBopenapp-wordpress-passwd\fP is a program that (re)sets the admin password for OpenApp
+.br
+Wordpress installs. It creates a password for you and echoes it on STDOUT. If you
+.br
+do not want a password to be created for you, add the argument 'stdin'.
+.SH OPTIONS
+This program has one optional argument:
+.br
+ - stdin: Will ask you to enter a password, which will be used to update the Wordpress password
+.SH AUTHOR
+openapp-wordpress-passwd was written by Mark Schouten.
+.PP
+This manual page was written by Mark Schouten <mark@tuxis.nl>, for the OpenApp
+.br
+project (and may be used by others).
