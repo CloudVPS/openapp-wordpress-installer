@@ -70,9 +70,11 @@ install_wordpress() {
 	rm -f ${INSTALLDIR}/wp-config.php.tmp
 	rm -f ${TMPDIR}/wordpress-$$.tar.gz
 
+	MYIP=$(ip addr show dev `awk ' { print $1" "$2 } ' < /proc/net/route | grep 00000000 | cut -f 1 -d ' '` | grep 'inet ' | cut -d' ' -f6 | cut -d/ -f1)
+	[ -z ${MYIP} ] && fatal "Cannot find out about your primary IP-address."
 	echo "Installing Wordpress database"
 	INSTALL_PDATA="weblog_title=My%20OpenApp%20Wordpress%20install&user_name=admin&admin_email=your@email.com&Submit=Install%20WordPress"
-	INSTALL_PURL="http://localhost/wp-admin/install.php?step=2"
+	INSTALL_PURL="http://${MYIP}/wp-admin/install.php?step=2"
 	wget -q -O /dev/null --post-data "${INSTALL_PDATA}" "${INSTALL_PURL}"
 	echo "Done!"
 }
