@@ -82,8 +82,8 @@ case "$1" in
     configure)
 	if [ -z $2 ]; then
 		echo "No old version of wordpress detected. Assuming new install"
-		install_wordpress
 		/usr/sbin/invoke-rc.d apache2 restart
+		install_wordpress
 	fi
     ;;
 
