@@ -40,8 +40,7 @@ install_wordpress() {
 	rm -rf /var/www
 	mkdir /var/www
 
-	[ -x /usr/bin/wget ] && wget -q -O ${TMPDIR}/wordpress-$$.tar.gz ${MIRROR}/latest.tar.gz
-	[ -f ${TMPDIR}/wordpress-$$.tar.gz ] || /usr/bin/curl -s -o ${TMPDIR}/wordpress-$$.tar.gz ${MIRROR}/latest.tar.gz
+	wget -q -O ${TMPDIR}/wordpress-$$.tar.gz ${MIRROR}/latest.tar.gz
 	if [ $? -eq 0 ]; then
 		mkdir -p ${INSTALLDIR} || fatal "Unable to create directory ${INSTALLDIR}"
 		cd ${INSTALLDIR} || fatal "Unable to go into directory ${INSTALLDIR}"
@@ -60,7 +59,11 @@ install_wordpress() {
 		  sed -n '1h;1!H;${;g;s/\/\*\*#@+.*#@-\*\//SALTCODE/g;p;}' | \
 		  sed -e "s/SALTCODE/$( echo ${SALT} | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/&/\\\&/g' -e 's/; define/;\\ndefine/g')/" > ${INSTALLDIR}/wp-config.php
                 [ $? -eq 0 ] || fatal "Unable to prepare ${INSTALLDIR}/wp-config.php"
+	else
+		echo "Failed to download Wordpress from ${MIRROR}/latest.tar.gz!"
+		exit 1
 	fi
+
 	echo "Fixing permissions on /var/www"
 	chown -R www-data:www-data /var/www
 	chmod 640 ${INSTALLDIR}/wp-config.php
@@ -70,11 +73,7 @@ install_wordpress() {
 	echo "Installing Wordpress database"
 	INSTALL_PDATA="weblog_title=My%20OpenApp%20Wordpress%20install&user_name=admin&admin_email=your@email.com&Submit=Install%20WordPress"
 	INSTALL_PURL="http://localhost/wp-admin/install.php?step=2"
-	if [ -x /usr/bin/wget ]; then
-		wget -q -O /dev/null --post-data "${INSTALL_PDATA}" "${INSTALL_PURL}"
-	elif [ -x /usr/bin/curl ]; then
-		curl -o /dev/null -s -d "${INSTALL_PDATA}" "${INSTALL_PURL}"
-	fi
+	wget -q -O /dev/null --post-data "${INSTALL_PDATA}" "${INSTALL_PURL}"
 	echo "Done!"
 }
 
