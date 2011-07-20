@@ -66,6 +66,16 @@ install_wordpress() {
 	chmod 640 ${INSTALLDIR}/wp-config.php
 	rm -f ${INSTALLDIR}/wp-config.php.tmp
 	rm -f ${TMPDIR}/wordpress-$$.tar.gz
+
+	echo "Installing Wordpress database"
+	INSTALL_PDATA="weblog_title=My%20OpenApp%20Wordpress%20install&user_name=admin&admin_email=your@email.com&Submit=Install%20WordPress"
+	INSTALL_PURL="http://localhost/wp-admin/install.php?step=2"
+	if [ -x /usr/bin/wget ]; then
+		wget -q -O /dev/null --post-data "${INSTALL_PDATA}" "${INSTALL_PURL}"
+	elif [ -x /usr/bin/curl ]; then
+		curl -o /dev/null -s -d "${INSTALL_PDATA}" "${INSTALL_PURL}"
+	fi
+	echo "Done!"
 }
 
 case "$1" in
