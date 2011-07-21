@@ -19,7 +19,7 @@ QUERY="${MYSQL} ${OPTS}"
 if [ -z ${SITEURL} ]; then
     SITEURL=$(${QUERY} "SELECT option_value FROM wp_options WHERE option_name = 'siteurl' LIMIT 1")
 else 
-    ${QUERY} "UPDATE wp_options SET option_value = '${SITEURL}' WHERE option_name = 'siteurl' LIMIT 1" || fatal "Could not change siteurl"
+    ${QUERY} "UPDATE wp_options SET option_value = '${SITEURL}' WHERE option_name = 'siteurl' OR option_name = 'home' LIMIT 2" || fatal "Could not change siteurl"
 fi
 
 echo ${SITEURL}
