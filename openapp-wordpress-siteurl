@@ -1,0 +1,25 @@
+#!/bin/bash
+
+
+fatal() {
+    echo "ERROR: $1"
+    exit 1
+}
+
+[ -z $1 ] && PASSWORD=`pwgen -s 10`
+[ "$1" = "-s" ] && read -p "Please enter your new siteurl: " SITEURL
+
+MYSQL=/usr/bin/mysql
+OPTS="--defaults-file=/etc/mysql/debian.cnf wordpress -B -N -e"
+
+QUERY="${MYSQL} ${OPTS}"
+[ $UID -eq 0 ] || fatal "You need to be root to run this"
+
+
+if [ -z ${SITEURL} ]; then
+    SITEURL=$(${QUERY} "SELECT option_value FROM wp_options WHERE option_name = 'siteurl' LIMIT 1")
+else 
+    ${QUERY} "UPDATE wp_options SET option_value = '${SITEURL}' WHERE option_name = 'siteurl' LIMIT 1" || fatal "Could not change siteurl"
+fi
+
+echo ${SITEURL}
