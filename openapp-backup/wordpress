@@ -1,0 +1,25 @@
+#!/bin/bash
+# Prio: 4
+
+. /usr/lib/openapp-backup/includes/index
+
+###
+# This script will set the siteurl to the primary ip of this box
+
+BACKUPDIR=$1
+ACTION=$2
+
+run_restore() {
+	MYIP=$(ip addr show dev `awk ' { print $1" "$2 } ' < /proc/net/route | grep 00000000 | cut -f 1 -d ' '` | grep 'inet ' | cut -d' ' -f6 | cut -d/ -f1)
+	[ -z ${MYIP} ] && fatal "Cannot find out about your primary IP-address."
+	echo "http://${MYIP}" | openapp-wordpress-siteurl -s
+}
+
+case ${ACTION} in
+    backup)
+        exit 0
+    ;;
+    restore)
+        run_restore
+    ;;
+esac
