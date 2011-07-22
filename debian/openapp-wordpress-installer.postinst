@@ -77,12 +77,14 @@ install_wordpress() {
 	INSTALL_PURL="http://${MYIP}/wp-admin/install.php?step=2"
 	wget -q -O /dev/null --post-data "${INSTALL_PDATA}" "${INSTALL_PURL}"
 	echo "Done!"
+
 }
 
 case "$1" in
     configure)
 	if [ -z $2 ]; then
 		echo "No old version of wordpress detected. Assuming new install"
+		/usr/sbin/a2enmod mime rewrite headers expires
 		/usr/sbin/invoke-rc.d apache2 restart
 		install_wordpress
 	fi
