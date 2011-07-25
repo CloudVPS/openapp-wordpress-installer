@@ -32,6 +32,10 @@ command.
 Wordpress installs. It creates a password for you and echoes it on STDOUT. If you
 .br
 do not want a password to be created for you, add the argument 'stdin'.
+.br
+Please note that passwords starting with "MD5|" will not be hashed anymore. So
+.br
+your password \fBcan not\fP start with that. :)
 .SH OPTIONS
 This program has one optional argument:
 .br
