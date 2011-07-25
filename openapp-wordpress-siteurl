@@ -7,7 +7,7 @@ fatal() {
 }
 
 [ -z $1 ] && PASSWORD=`pwgen -s 10`
-[ "$1" = "-s" ] && read -p "Please enter your new siteurl: " SITEURL
+[ "$1" = "stdin" ] && read -p "Please enter your new siteurl: " SITEURL
 
 MYSQL=/usr/bin/mysql
 OPTS="--defaults-file=/etc/mysql/debian.cnf wordpress -B -N -e"
