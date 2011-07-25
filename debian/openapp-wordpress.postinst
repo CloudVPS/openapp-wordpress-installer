@@ -35,6 +35,11 @@ case "$1" in
 		mkdir -p /etc/openapp-tuning/
 		echo "wordpress" > /etc/openapp-tuning/identity
 		[ -x /usr/sbin/openapp-tuning ] && openapp-tuning wordpress start
+		if [ $? -eq 0 ]; then
+			echo "Restarting apache2 & Mysql to benefit from tuned config"
+			/etc/init.d/apache2 restart
+			restart mysql
+		fi
 	;;
 	abort-upgrade|abort-remove|abort-deconfigure|triggered)
     ;;

@@ -22,6 +22,6 @@ Description: Wordpress CMS
 
 Package: openapp-wordpress
 Architecture: any
-Pre-Depends: openapp-backup
-Depends: ${shlibs:Depends}, ${misc:Depends}, openpanel-openapp-mod-wordpress, openapp-wordpress-installer, rsync, openapp-tuning
+Pre-Depends: openapp-backup, openapp-tuning, openapp-wordpress-installer
+Depends: ${shlibs:Depends}, ${misc:Depends}, openpanel-openapp-mod-wordpress, rsync
 Description: This will install your wordpress OpenApp Appliance!
