@@ -24,4 +24,6 @@ Package: openapp-wordpress
 Architecture: any
 Pre-Depends: openapp-backup, openapp-tuning, openapp-wordpress-installer
 Depends: ${shlibs:Depends}, ${misc:Depends}, openpanel-openapp-mod-wordpress, rsync
+Provides: openapp-app
+Conflicts: openapp-app
 Description: This will install your wordpress OpenApp Appliance!
