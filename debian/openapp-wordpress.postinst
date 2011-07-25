@@ -1,5 +1,5 @@
 #!/bin/sh
-# postinst script for joomla
+# postinst script for wordpress
 #
 # see: dh_installdeb(1)
 
