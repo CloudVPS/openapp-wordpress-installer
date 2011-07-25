@@ -10,6 +10,8 @@ Package: openapp-wordpress-installer
 Architecture: any
 Pre-Depends: wget, pwgen, mysql-client, mysql-server, apache2-mpm-prefork, libapache2-mod-php5, php5-mysql
 Depends: ${shlibs:Depends}, ${misc:Depends}, php5-cli
+Provides: openapp-app-installer
+Conflicts: openapp-app-installer
 Description: Wordpress CMS
  A Openpanel OpenApp meta-package for Wordpress. This does not carry the actual Wordpress source,
  but just makes sure that it is installed and upgraded if necessary. It detects the current

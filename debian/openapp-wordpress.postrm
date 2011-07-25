@@ -30,6 +30,8 @@ case "$1" in
 			[ -L "${MODULEDIR}/${SCRIPT}" ] && rm "${MODULEDIR}/${SCRIPT}"
 			echo "Disabling ${SCRIPT}"
 		done
+		rm /etc/openapp-backup/scripts.d/wordpress
+
 		echo "Removing openapp-tuning identity-file"
 		rm /etc/openapp-tuning/identity
     ;;

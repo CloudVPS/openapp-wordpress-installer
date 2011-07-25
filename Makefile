@@ -1,4 +1,5 @@
 PREFIX=${CURDIR}/debian/openapp-wordpress-installer
+PREFIX2=${CURDIR}/debian/openapp-wordpress
 
 install:
 # bin
@@ -12,9 +13,9 @@ install:
 	cp debian/openapp-wordpress-siteurl.1 $(PREFIX)/usr/share/man/man1
 
 #openapp-backupmodule
-	mkdir -p $(PREFIX)/etc/openapp-backup/scripts.d/
-	cp openapp-backup/wordpress $(PREFIX)/etc/openapp-backup/scripts.d/
-	chmod +x $(PREFIX)/etc/openapp-backup/scripts.d/wordpress
+	mkdir -p $(PREFIX2)/etc/openapp-backup/scripts.d/
+	cp openapp-backup/wordpress $(PREFIX2)/etc/openapp-backup/scripts.d/
+	chmod +x $(PREFIX2)/etc/openapp-backup/scripts.d/wordpress
 
 uninstall:
 # bin
@@ -22,6 +23,7 @@ uninstall:
 	rm -rf $(PREFIX)/usr/share/man/man1/openapp-wordpress-passwd.1.gz
 	rm -rf $(PREFIX)/usr/bin/openapp-wordpress-siteurl
 	rm -rf $(PREFIX)/usr/share/man/man1/openapp-wordpress-siteurl.1.gz
+	rm -rf $(PREFIX2)/etc/openapp-backup/scripts.d/wordpress
 
 clean:
 	-echo "NOP"
