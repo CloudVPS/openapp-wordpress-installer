@@ -30,10 +30,10 @@ case "$1" in
 			[ -L "${MODULEDIR}/${SCRIPT}" ] && rm "${MODULEDIR}/${SCRIPT}"
 			echo "Disabling ${SCRIPT}"
 		done
-		rm /etc/openapp-backup/scripts.d/wordpress
+		[ -r /etc/openapp-backup/scripts.d/wordpress ] && rm /etc/openapp-backup/scripts.d/wordpress
 
 		echo "Removing openapp-tuning identity-file"
-		rm /etc/openapp-tuning/identity
+		[ -r /etc/openapp-tuning/identity ] && rm /etc/openapp-tuning/identity
     ;;
 
     upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
