@@ -13,9 +13,9 @@ install:
 	cp debian/openapp-wordpress-siteurl.1 $(PREFIX)/usr/share/man/man1
 
 #openapp-backupmodule
-	mkdir -p $(PREFIX2)/etc/openapp-backup/scripts.d/
-	cp openapp-backup/wordpress $(PREFIX2)/etc/openapp-backup/scripts.d/
-	chmod +x $(PREFIX2)/etc/openapp-backup/scripts.d/wordpress
+	mkdir -p $(PREFIX2)/usr/lib/openapp-backup/modules/
+	cp openapp-backup/wordpress $(PREFIX2)/usr/lib/openapp-backup/modules/
+	chmod +x $(PREFIX2)/usr/lib/openapp-backup/modules/*
 
 uninstall:
 # bin

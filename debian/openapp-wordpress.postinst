@@ -21,13 +21,11 @@ case "$1" in
     configure)
 		if [ -z $2 ]; then
 			echo "Creating symlinks to make nice backups of your OpenApp Appliance"
-			SCRIPTS="var-www home mysql openpanel"
+			SCRIPTS="var-www home mysql openpanel wordpress"
 			BASEMODULES=/usr/lib/openapp-backup/modules
 			MODULEDIR=/etc/openapp-backup/scripts.d
 			for SCRIPT in ${SCRIPTS}; do
-				# Only create syminks if they don't exist allready or are replaced by a file
-				[ -L "${MODULEDIR}/${SCRIPT}" -o -f "${MODULEDIR}/${SCRIPT}" ] || ln -s "${BASEMODULES}/${SCRIPT}" "${MODULEDIR}/${SCRIPT}"
-				echo "Enabling ${SCRIPT}"
+				openapp-backup-enmod ${SCRIPT}
 			done
 
 			echo "Identify ourselve to openapp-tuning and run it"

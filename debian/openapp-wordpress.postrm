@@ -22,15 +22,12 @@ set -e
 case "$1" in
     purge|remove|abort-install)
 		echo "Removing symlinks for openapp-backup placed by the installscript"
-		SCRIPTS="var-www home mysql openpanel"
+		SCRIPTS="var-www home mysql openpanel wordpress"
 		BASEMODULES=/usr/lib/openapp-backup/modules
 		MODULEDIR=/etc/openapp-backup/scripts.d
 		for SCRIPT in ${SCRIPTS}; do
-			# Only create syminks if they exist
-			[ -L "${MODULEDIR}/${SCRIPT}" ] && rm "${MODULEDIR}/${SCRIPT}"
-			echo "Disabling ${SCRIPT}"
+			openapp-backup-dismod ${SCRIPT}
 		done
-		[ -r /etc/openapp-backup/scripts.d/wordpress ] && rm /etc/openapp-backup/scripts.d/wordpress
 
 		echo "Removing openapp-tuning identity-file"
 		[ -r /etc/openapp-tuning/identity ] && rm /etc/openapp-tuning/identity
