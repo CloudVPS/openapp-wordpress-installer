@@ -28,7 +28,7 @@ case "$1" in
 				openapp-backup-enmod ${SCRIPT}
 			done
 
-			echo "Identify ourselve to openapp-tuning and run it"
+			echo "Identify ourself to openapp-tuning and run it"
 			mkdir -p /etc/openapp-tuning/
 			echo "wordpress" > /etc/openapp-tuning/identity
 			[ -x /usr/sbin/openapp-tuning ] && openapp-tuning wordpress start dorestart
