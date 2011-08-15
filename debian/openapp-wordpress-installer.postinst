@@ -84,7 +84,7 @@ case "$1" in
     configure)
 	if [ -z $2 ]; then
 		echo "No old version of wordpress detected. Assuming new install"
-		/usr/sbin/a2enmod mime rewrite headers expires
+		/usr/sbin/a2enmod mime rewrite headers expires ssl
 		/usr/sbin/invoke-rc.d apache2 restart
 		install_wordpress
 	fi
